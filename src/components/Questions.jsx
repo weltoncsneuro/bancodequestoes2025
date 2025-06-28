@@ -10,6 +10,8 @@ import { Badge } from '@/components/ui/badge'
 import { Plus, Edit, Trash2, Search, Filter } from 'lucide-react'
 import { toast } from 'sonner'
 
+const API_BASE = 'https://weltoncardoso.pythonanywhere.com'
+
 const Questions = () => {
   const [questions, setQuestions] = useState([])
   const [subjects, setSubjects] = useState([])
@@ -40,7 +42,7 @@ const Questions = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/questions')
+      const response = await fetch(`${API_BASE}/api/questions`)
       const data = await response.json()
       setQuestions(data)
     } catch (error) {
@@ -50,7 +52,7 @@ const Questions = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/subjects')
+      const response = await fetch(`${API_BASE}/api/subjects`)
       const data = await response.json()
       setSubjects(data)
     } catch (error) {
@@ -82,7 +84,7 @@ const Questions = () => {
     e.preventDefault()
     
     try {
-      const response = await fetch('http://localhost:5000/api/questions', {
+      const response = await fetch(`${API_BASE}/api/questions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +119,7 @@ const Questions = () => {
     if (!confirm('Tem certeza que deseja excluir esta questão?')) return
 
     try {
-      const response = await fetch(`http://localhost:5000/api/questions/${id}`, {
+      const response = await fetch(`${API_BASE}/api/questions/${id}`, {
         method: 'DELETE',
       })
 
@@ -328,4 +330,3 @@ const Questions = () => {
 }
 
 export default Questions
-
