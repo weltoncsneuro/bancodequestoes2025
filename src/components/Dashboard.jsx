@@ -19,19 +19,19 @@ const Dashboard = () => {
   const fetchStats = async () => {
     try {
       // Fetch questions count
-      const questionsRes = await fetch('http://localhost:5000/api/questions')
+      const questionsRes = await fetch('https://weltoncardoso.pythonanywhere.com/api/questions')
       const questions = await questionsRes.json()
       
       // Fetch exams count
-      const examsRes = await fetch('http://localhost:5000/api/exams')
+      const examsRes = await fetch('https://weltoncardoso.pythonanywhere.com/api/exams')
       const exams = await examsRes.json()
       
       // Fetch subjects count
-      const subjectsRes = await fetch('http://localhost:5000/api/subjects')
+      const subjectsRes = await fetch('https://weltoncardoso.pythonanywhere.com/api/subjects')
       const subjects = await subjectsRes.json()
       
       // Fetch overall performance
-      const performanceRes = await fetch('http://localhost:5000/api/performance/overall')
+      const performanceRes = await fetch('https://weltoncardoso.pythonanywhere.com/api/performance/overall')
       const performance = await performanceRes.json()
 
       setStats({
@@ -170,4 +170,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-

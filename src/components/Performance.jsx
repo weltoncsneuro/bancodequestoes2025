@@ -7,6 +7,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { TrendingUp, Target, Award, RefreshCw } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
+const API_BASE = 'https://weltoncardoso.pythonanywhere.com'
+
 const Performance = () => {
   const [performance, setPerformance] = useState([])
   const [overallPerformance, setOverallPerformance] = useState({
@@ -24,7 +26,7 @@ const Performance = () => {
 
   const fetchPerformance = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/performance')
+      const response = await fetch(`${API_BASE}/api/performance`)
       const data = await response.json()
       setPerformance(data)
     } catch (error) {
@@ -38,7 +40,7 @@ const Performance = () => {
 
   const fetchOverallPerformance = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/performance/overall')
+      const response = await fetch(`${API_BASE}/api/performance/overall`)
       const data = await response.json()
       setOverallPerformance(data)
     } catch (error) {
@@ -50,7 +52,7 @@ const Performance = () => {
     if (!confirm('Tem certeza que deseja resetar todas as estatísticas de desempenho?')) return
 
     try {
-      const response = await fetch('http://localhost:5000/api/performance/reset', {
+      const response = await fetch(`${API_BASE}/api/performance/reset`, {
         method: 'POST',
       })
 
@@ -278,4 +280,3 @@ const Performance = () => {
 }
 
 export default Performance
-

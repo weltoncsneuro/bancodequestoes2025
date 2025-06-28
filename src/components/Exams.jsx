@@ -11,6 +11,8 @@ import { Progress } from '@/components/ui/progress'
 import { Plus, Play, Eye, Trash2, CheckCircle, XCircle } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
+const API_BASE = 'https://weltoncardoso.pythonanywhere.com'
+
 const Exams = () => {
   const [exams, setExams] = useState([])
   const [subjects, setSubjects] = useState([])
@@ -35,7 +37,7 @@ const Exams = () => {
 
   const fetchExams = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/exams')
+      const response = await fetch(`${API_BASE}/api/exams`)
       const data = await response.json()
       setExams(data)
     } catch (error) {
@@ -49,7 +51,7 @@ const Exams = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/subjects')
+      const response = await fetch(`${API_BASE}/api/subjects`)
       const data = await response.json()
       setSubjects(data)
     } catch (error) {
@@ -62,7 +64,7 @@ const Exams = () => {
     
     try {
       // Primeiro, gerar as questões
-      const questionsResponse = await fetch('http://localhost:5000/api/questions/generate-exam', {
+      const questionsResponse = await fetch(`${API_BASE}/api/questions/generate-exam`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +86,7 @@ const Exams = () => {
       const questionIds = questions.map(q => q.id)
 
       // Criar o simulado
-      const examResponse = await fetch('http://localhost:5000/api/exams', {
+      const examResponse = await fetch(`${API_BASE}/api/exams`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +125,7 @@ const Exams = () => {
 
   const handleStartExam = async (examId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/exams/${examId}`)
+      const response = await fetch(`${API_BASE}/api/exams/${examId}`)
       const exam = await response.json()
       
       setCurrentExam(exam)
@@ -153,7 +155,7 @@ const Exams = () => {
     if (userAnswer) {
       // Submeter resposta
       try {
-        await fetch(`http://localhost:5000/api/exams/${currentExam.id}/answer`, {
+        await fetch(`${API_BASE}/api/exams/${currentExam.id}/answer`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -185,7 +187,7 @@ const Exams = () => {
     if (!confirm('Tem certeza que deseja excluir este simulado?')) return
 
     try {
-      const response = await fetch(`http://localhost:5000/api/exams/${id}`, {
+      const response = await fetch(`${API_BASE}/api/exams/${id}`, {
         method: 'DELETE',
       })
 
@@ -446,4 +448,3 @@ const Exams = () => {
 }
 
 export default Exams
-
